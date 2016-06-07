@@ -9,7 +9,7 @@
 
 ```ruby
 
-require 'ruby-crisp-api'
+require 'crisp'
 
 crisp_client = Crisp::Client.new
 ```
@@ -31,7 +31,7 @@ puts "Hello " + profile["first_name"]
 
 
 ```ruby
-require 'ruby-crisp-api'
+require 'crisp'
 
 crisp_client = Crisp::Client.new
 crisp_client.user_session.login_with_email("your_email@.com", "your_password")
