@@ -33,6 +33,7 @@ puts "Hello " + profile["first_name"]
 ```ruby
 require 'ruby-crisp-api'
 
+crisp_client = Crisp::Client.new
 crisp_client.user_session.login_with_email("your_email@.com", "your_password")
 crisp_client.on "message:send" do |message|
   crisp_client.website_conversations.send_text_message(message["website_id"], message["session_id"], "I'm a bot")
