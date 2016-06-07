@@ -1,0 +1,116 @@
+# Crisp API Ruby
+
+## Installation
+
+`gem install ruby-crisp-api`
+
+## API Overview
+
+
+```ruby
+
+require 'ruby-crisp-api'
+
+crisp_client = Crisp::Client.new
+```
+
+To use Crisp, first, you have to login
+
+```ruby
+crisp_client.user_session.login_with_email("your_email@.com", "your_password")
+```
+
+When you are logged you can then use the Crisp API
+
+```ruby
+profile = crisp_client.user_profile.get()
+puts "Hello " + profile["first_name"]
+```
+
+## Create your own bot!
+
+
+```ruby
+require 'ruby-crisp-api'
+
+crisp_client.user_session.login_with_email("your_email@.com", "your_password")
+crisp_client.on "message:send" do |message|
+  crisp_client.website_conversations.send_text_message(message["website_id"], message["session_id"], "I'm a bot")
+end
+
+#trick to keep the script running
+loop do
+  msg = STDIN.gets.strip
+end
+```
+
+### Available resources & methods
+
+*Where you see `params` it is a plain object, e.g. `{ email: 'foo@example.com' }`*
+
+  * on(event, callback)
+  * user_session
+    * `login_with_email(email, password)`
+    * `recover_password(email)`
+    * `logout()`
+  * user_account
+    * `get()`
+    * `create(params)`
+  * user_notification
+    * `get()`
+    * `update(params)`
+  * user_profile
+    * `get()`
+    * `update(params)`
+  * user_schedule
+    * `get()`
+    * `update(params)`
+  * userWebsites
+    * `get()`
+  * website
+    * `create(params)`
+    * `delete(website_id)`
+  * website_settings
+    * `get(website_id)`
+    * `update(website_id)`
+  * website_stats
+    * `get(website_id)`
+  * website_conversations
+    * `get_list(website_id, page)`
+    * `get_one(website_id, session_id)`
+    * `send_text_tessage(website_id, session_id, text)`
+    * `set_state(website_id, session_id, state)`
+    * `set_email(website_id, session_id, email)`
+    * `set_nickname(website_id, session_id, nickname)`
+    * `set_block(website_id, session_id, blocked)`
+    * `delete_one(website_id, session_id)`
+    * `acknowledge_messages(website_id, session_id, fingerprints)`
+  * websiteOperators
+    * `get_list(website_id)`
+    * `get_one(website_id, operator_id)`
+    * `delete_one(website_id, operator_id)`
+    * `create_one(website_id, parameters)`
+    * `update_one(website_id, operator_id, parameters)`
+
+### Available events
+
+  * `message:send` Message from visitor
+  * `message:received` Message from operator
+  * `message:compose:send` Visitor is writing something
+  * `message:acknowledge:read:send` Message is read from visitor
+  * `message:acknowledge:read:received` Message is read from operator
+  * `message:acknowledge:delivered` Message is delivered
+  * `session:update_availability` Visitor is now online or offline
+  * `session:request:initiatedy` You tried to initiate a message to someone
+  * `session:set_email` Email is updated
+  * `session:set_nickname` Nickname is updated
+  * `session:set_avatar` Avatar is updated
+  * `session:set_cover` Cover picture is updated
+  * `session:set_block` User blocked updated
+  * `session:set_state` Conversation state updated
+  * `session:set_tags` Conversation new tags
+  * `session:sync:pages` Visitor visited some pages
+  * `session:sync:geolocation` Visitor new geolocation
+  * `session:sync:system` Visitor new system (Useragent, etc)
+  * `session:sync:extended_informations` Visitor new extended informations
+  * `session:sync:removed` Conversation removed
