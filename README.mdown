@@ -85,7 +85,7 @@ end
     * `set_block(website_id, session_id, blocked)`
     * `delete_one(website_id, session_id)`
     * `acknowledge_messages(website_id, session_id, fingerprints)`
-  * websiteOperators
+  * website_operators
     * `get_list(website_id)`
     * `get_one(website_id, operator_id)`
     * `delete_one(website_id, operator_id)`
