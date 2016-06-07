@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name        = 'ruby-crisp-api'
-  s.version     = '1.0.2'
+  s.version     = '1.0.3'
   s.date        = Date.today
   s.summary     = "Crisp Ruby API"
   s.description = "Crisp Ruby API"
   s.authors     = ["Baptiste Jamin"]
   s.email       = 'baptiste@crisp.im'
-  s.files       = ["lib/crisp.rb"]
+  s.files       = `git ls-files`.split($/)
   s.homepage    = 'https://crisp.im'
   s.license     = 'MIT'
 
