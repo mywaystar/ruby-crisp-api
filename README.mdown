@@ -4,8 +4,13 @@
 
 `gem install ruby-crisp-api`
 
-## API Overview
 
+## API Docs
+
+The full API documentation is available at: [docs.crisp.im/api/](https://docs.crisp.im/api/)
+
+
+## API Overview
 
 ```ruby
 
