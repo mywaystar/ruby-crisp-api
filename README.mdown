@@ -4,8 +4,11 @@
 
 `gem install ruby-crisp-api`
 
-## API Overview
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 07/17/2016
+* **😘 Maintainer**: [@mywaystar](https://github.com/mywaystar)
 
+
+## API Overview
 
 ```ruby
 
