@@ -1,7 +1,7 @@
 require 'rest-client'
 
 module Crisp
-  class WebsiteStats
+  class WebsiteStatistics
     def initialize(crisp)
       @crisp = crisp
     end

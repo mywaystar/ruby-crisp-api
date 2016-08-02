@@ -11,8 +11,9 @@ require 'resources/user_websites'
 require 'resources/website'
 require 'resources/website_operators'
 require 'resources/website_settings'
-require 'resources/website_stats'
+require 'resources/website_statistics'
 require 'resources/website_conversations'
+require 'resources/website_conversation'
 
 module Crisp
   class Client
@@ -29,8 +30,9 @@ module Crisp
     attr_accessor :website
     attr_accessor :website_operators
     attr_accessor :website_settings
-    attr_accessor :website_stats
+    attr_accessor :website_statistics
     attr_accessor :website_conversations
+    attr_accessor :website_conversation
     attr_accessor :auth
     attr_accessor :socket
 
@@ -47,8 +49,9 @@ module Crisp
       @website                = Crisp::Website.new(self)
       @website_operators      = Crisp::WebsiteOperators.new(self)
       @website_settings       = Crisp::WebsiteSettings.new(self)
-      @website_stats          = Crisp::WebsiteStats.new(self)
+      @website_statistics     = Crisp::WebsiteStatistics.new(self)
       @website_conversations  = Crisp::WebsiteConversations.new(self)
+      @website_conversation   = Crisp::WebsiteConversation.new(self)
     end
 
     def rest_host

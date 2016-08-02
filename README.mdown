@@ -36,7 +36,16 @@ require 'crisp'
 crisp_client = Crisp::Client.new
 crisp_client.user_session.login_with_email("your_email@.com", "your_password")
 crisp_client.on "message:send" do |message|
-  crisp_client.website_conversations.send_text_message(message["website_id"], message["session_id"], "I'm a bot")
+  crisp_client.website_conversation.send_message_in_conversation(
+    message["website_id"],
+    message["session_id"],
+    {
+      :origin  => "chat",
+      :content => "I'm a bot",
+      :type    => "text",
+      :from    => "operator"
+    }
+  )
 end
 
 #trick to keep the script running
@@ -74,18 +83,28 @@ end
   * website_settings
     * `get(website_id)`
     * `update(website_id)`
-  * website_stats
+  * website_statistics
     * `get(website_id)`
   * website_conversations
-    * `get_list(website_id, page)`
-    * `get_one(website_id, session_id)`
-    * `send_text_tessage(website_id, session_id, text)`
-    * `set_state(website_id, session_id, state)`
-    * `set_email(website_id, session_id, email)`
-    * `set_nickname(website_id, session_id, nickname)`
-    * `set_block(website_id, session_id, blocked)`
-    * `delete_one(website_id, session_id)`
-    * `acknowledge_messages(website_id, session_id, fingerprints)`
+    * `list(website_id, page = 0)`
+    * `search(website_id, page = 0, search_type, search_query)`
+  * website_conversation
+    * `create_new_conversation(website_id)`
+    * `check_conversation_exists(website_id, session_id)`
+    * `get_conversation(website_id, session_id)`
+    * `remove_conversation(website_id, session_id)`
+    * `initiate_conversation_with_existing_session(website_id, session_id)`
+    * `get_messages_in_conversation(website_id, session_id)`
+    * `send_message_in_conversation(website_id, session_id, message)`
+    * `compose_message_in_conversation(website_id, session_id, compose)`
+    * `mark_messages_read_in_conversation(website_id, session_id, read)`
+    * `get_conversation_metas(website_id, session_id)`
+    * `update_conversation_metas(website_id, session_id, metas)`
+    * `get_conversation_state(website_id, session_id, metas)`
+    * `change_conversation_state(website_id, session_id, state)`
+    * `change_conversation_state(website_id, session_id, state)`
+    * `get_block_status_for_conversation(website_id, session_id, blocked)`
+    * `block_incoming_messages_for_conversation(website_id, session_id, blocked)`
   * website_operators
     * `get_list(website_id)`
     * `get_one(website_id, operator_id)`
@@ -115,3 +134,12 @@ end
   * `session:sync:system` Visitor new system (Useragent, etc)
   * `session:sync:extended_informations` Visitor new extended informations
   * `session:sync:removed` Conversation removed
+
+### Play with source code
+
+`
+git clone git@github.com:crisp-im/ruby-crisp-api.git
+cd ruby-crisp-api
+emacs examples/basic.rb
+bundle exec ruby -Ilib examples/basic.rb
+`

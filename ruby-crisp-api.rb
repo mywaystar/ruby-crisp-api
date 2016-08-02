@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'ruby-crisp-api'
-  s.version     = '1.0.3'
+  s.version     = '1.1.0'
   s.date        = Date.today
   s.summary     = "Crisp Ruby API"
   s.description = "Crisp Ruby API"
